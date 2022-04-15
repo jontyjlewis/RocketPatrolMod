@@ -1,6 +1,6 @@
 ### Mod to-do list
 
-Implement parallax scrolling (10)
+Implement parallax scrolling (10) ✓
 
 Use Phaser's particle emitter to create a particle explosion when the rocket hits the spaceship (20)
 

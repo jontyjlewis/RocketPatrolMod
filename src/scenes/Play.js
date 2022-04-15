@@ -8,7 +8,14 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('spaceship', './assets/spaceship.png');
-        this.load.image('starfield', './assets/starfield.png');
+        
+        // -- Parallax Background --
+        // this.load.image('starfield', './assets/starfield.png');
+        this.load.image('bg1', './assets/Background/bg1.png');
+        this.load.image('bg2', './assets/Background/bg2.png');
+        this.load.image('bg3', './assets/Background/bg3.png');
+        this.load.image('bg4', './assets/Background/bg4.png');
+        this.load.image('bg5', './assets/Background/bg5.png');
 
         // load sprite sheet
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 11});
@@ -18,8 +25,20 @@ class Play extends Phaser.Scene {
     create() {
         //this.add.text(20, 20, "this is the play scene");
         
+        // -- Parallax Background --
         // starfield background
-        this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
+        // this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
+        this.bg1 = this.add.tileSprite(0, 0, 640, 480, 'bg1').setOrigin(0, 0);
+        this.bg2 = this.add.tileSprite(0, 0, 640, 480, 'bg2').setOrigin(0, 0);
+        this.bg3 = this.add.tileSprite(0, 0, 640, 480, 'bg3').setOrigin(0, 0);
+        this.bg4 = this.add.tileSprite(0, 0, 640, 480, 'bg4').setOrigin(0, 0);
+        this.bg5 = this.add.tileSprite(0, 0, 1940, 480, 'bg5').setOrigin(0, 0);
+
+        // const width = this.scale.width;
+        // const height = this.scale.height;
+
+        // this.add.image(width * 0.5, height * 0.5, 'bg1').setScrollFactor(0);
+        // this.add.image(width * 0.5, height * 0.5, 'bg2').setScrollFactor(0.25);
 
         // green UI rectangle
         this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
@@ -92,8 +111,14 @@ class Play extends Phaser.Scene {
             this.sound.play('sfx_select');
         }
 
+        // -- Parallax Background --
         // scrolling background
-        this.starfield.tilePositionX -= 4;
+        //this.starfield.tilePositionX -= 0;
+        this.bg1.tilePositionX -= 0.1;
+        this.bg2.tilePositionX -= 0.4;
+        this.bg3.tilePositionX -= 0.7;
+        this.bg4.tilePositionX -= 1.3;
+        this.bg5.tilePositionX -= 4;
 
         if (!this.gameOver) {
             this.p1Rocket.update();
