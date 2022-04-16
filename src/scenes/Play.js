@@ -83,7 +83,40 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
         }
-        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1Score, scoreConfig);
+        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1Score, scoreConfig);      
+
+        // -- GAME TIMER --
+        this.initialTime = game.settings.gameTimer/1000;
+        // console.log(this.initialTime);
+        
+        let timeConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'center',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 100
+        }
+        this.timeLeft = this.add.text(game.config.width/2, borderUISize + borderPadding * 2, this.initialTime, timeConfig);
+
+        this.timedEvent = this.time.addEvent({
+            delay: 1000,
+            callback: countDown,
+            callbackScope: this,
+            loop: true
+        });
+
+        // -- SPEED BOOST AFTER 30 SECONDS --
+        this.speedBoost = this.time.delayedCall(30000, () => {
+            console.log("SPEED BOOST STARTED");
+            this.ship01.moveSpeed += 2;
+            this.ship02.moveSpeed += 2;
+            this.ship03.moveSpeed += 2;
+        });
 
         // GAME OVER flag
         this.gameOver = false;
@@ -98,7 +131,6 @@ class Play extends Phaser.Scene {
     }
 
     update() {
-        // check input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
             this.sound.play('sfx_select');
@@ -131,7 +163,6 @@ class Play extends Phaser.Scene {
             this.p1Rocket.reset();
             //this.ship03.reset();
             this.shipExplode(this.ship03);
-
         }
         if (this.checkCollision(this.p1Rocket, this.ship02)) {
             // console.log('kaboom ship 02');
@@ -191,4 +222,26 @@ class Play extends Phaser.Scene {
         this.scoreLeft.text = this.p1Score;
         this.sound.play('sfx_explosion');
     }
+}
+
+function countDown() {
+    // timer logic
+    if(this.initialTime > 0) {
+        this.initialTime -= 1;
+    }
+
+    // console.log(this.initialTime);
+    let timeConfig = {
+        fontFamily: 'Courier',
+        fontSize: '28px',
+        backgroundColor: '#F3B141',
+        color: '#843605',
+        align: 'center',
+        padding: {
+            top: 5,
+            bottom: 5,
+        },
+        fixedWidth: 100
+    }
+    this.timeLeft = this.add.text(game.config.width/2, borderUISize + borderPadding * 2, this.initialTime, timeConfig);
 }
