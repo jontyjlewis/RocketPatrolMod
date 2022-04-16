@@ -15,4 +15,4 @@ X Replace the UI borders with new artwork (10)
 X Create a new spaceship type (w/ new artwork) that's smaller, moves faster, and is worth more points (20)
 
 ✓ Create new artwork for all of the in-game assets (rocket, spaceships, explosion) (20)
-    # I already did this with my initial RocketPatrol submission, but my TA said it was fine #
+## I already did this with my initial RocketPatrol submission, but my TA said it was fine
