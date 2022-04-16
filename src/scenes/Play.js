@@ -17,6 +17,9 @@ class Play extends Phaser.Scene {
         this.load.image('bg4', './assets/Background/bg4.png');
         this.load.image('bg5', './assets/Background/bg5.png');
 
+        // load base particle
+        this.load.image('particle', './assets/particle.png');
+
         // load sprite sheet
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 11});
         
@@ -33,12 +36,6 @@ class Play extends Phaser.Scene {
         this.bg3 = this.add.tileSprite(0, 0, 640, 480, 'bg3').setOrigin(0, 0);
         this.bg4 = this.add.tileSprite(0, 0, 640, 480, 'bg4').setOrigin(0, 0);
         this.bg5 = this.add.tileSprite(0, 0, 1940, 480, 'bg5').setOrigin(0, 0);
-
-        // const width = this.scale.width;
-        // const height = this.scale.height;
-
-        // this.add.image(width * 0.5, height * 0.5, 'bg1').setScrollFactor(0);
-        // this.add.image(width * 0.5, height * 0.5, 'bg2').setScrollFactor(0.25);
 
         // green UI rectangle
         this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
@@ -120,6 +117,7 @@ class Play extends Phaser.Scene {
         this.bg4.tilePositionX -= 1.3;
         this.bg5.tilePositionX -= 4;
 
+        // update ship movement
         if (!this.gameOver) {
             this.p1Rocket.update();
             this.ship01.update();
@@ -163,6 +161,18 @@ class Play extends Phaser.Scene {
     }
 
     shipExplode(ship) {
+        // -- Particle System --
+        const particles = this.add.particles('particle');
+        particles.createEmitter({
+            x: ship.x + 32,
+            y: ship.y + 16,
+            quantity: 10,
+            speedY: { min: -150, max: 150 },
+            speedX: { min: -150, max: 150 },
+            scale: {start: 2, end: 0.02},
+            lifespan: 600,
+        })
+
         // temp hide ship
         ship.alpha = 0;
         
@@ -173,6 +183,7 @@ class Play extends Phaser.Scene {
             ship.reset();                       // resets ship position
             ship.alpha = 1;                     // make ship visible again
             boom.destroy();                     // removes the explosion sprite
+            particles.destroy();
         });
 
         // adding to score and repaint
