@@ -6,7 +6,7 @@
 
 ### ✓ Implement parallax scrolling (10)
 
-### X Replace the UI borders with new artwork (10)
+### ✓ Replace the UI borders with new artwork (10)
 
 ### ✓ Display the time remaining (in seconds) on the screen (10)
 

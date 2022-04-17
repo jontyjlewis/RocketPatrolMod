@@ -20,6 +20,9 @@ class Play extends Phaser.Scene {
         this.load.image('bg4', './assets/Background/bg4.png');
         this.load.image('bg5', './assets/Background/bg5.png');
 
+        // -- Borders --
+        this.load.image('borders', './assets/borders.png');
+
         // load base particle
         this.load.image('particle', './assets/particle.png');
 
@@ -57,10 +60,13 @@ class Play extends Phaser.Scene {
         this.smallShip.moveSpeed = 7;
 
         // white border
-        this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
-	    this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
-	    this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
-	    this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
+        // this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
+	    // this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
+	    // this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
+	    // this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
+
+        // -- Borders --
+        this.borders = this.add.tileSprite(0, 0, 640, 480, 'borders').setOrigin(0,0);
 
         // rocket keybinds
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
