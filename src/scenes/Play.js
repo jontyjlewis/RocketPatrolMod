@@ -100,6 +100,7 @@ class Play extends Phaser.Scene {
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1Score, scoreConfig);      
 
         // -- GAME TIMER --
+        // in thanks to help from https://phaser.discourse.group/t/countdown-timer/2471/3
         this.initialTime = game.settings.gameTimer/1000;
         // console.log(this.initialTime);
         
@@ -243,6 +244,9 @@ class Play extends Phaser.Scene {
     }
 }
 
+
+// timer logic fixed and put in own function 
+// in thanks to help from https://phaser.discourse.group/t/countdown-timer/2471/3
 function countDown() {
     // timer logic
     if(this.initialTime > 0) {
