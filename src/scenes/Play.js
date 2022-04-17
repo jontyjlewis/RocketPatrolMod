@@ -8,6 +8,9 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('spaceship', './assets/spaceship.png');
+
+        // -- New Spaceship Asset --
+        this.load.image('smallShip', './assets/spaceship2.png');
         
         // -- Parallax Background --
         // this.load.image('starfield', './assets/starfield.png');
@@ -47,6 +50,11 @@ class Play extends Phaser.Scene {
         this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4, 'spaceship', 0, 30).setOrigin(0, 0);
         this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2, 'spaceship', 0, 20).setOrigin(0, 0);
         this.ship03 = new Spaceship(this, game.config.width, borderUISize * 6 + borderPadding * 4, 'spaceship', 0, 10).setOrigin(0, 0);
+
+        // --ADD NEW SPACESHIP -- (worth 60 points)
+        this.smallShip = new Spaceship(this, game.config.width + borderUISize * 9, borderUISize * 5, 'smallShip', 0, 60).setOrigin(0, 0);
+        // set custom speed
+        this.smallShip.moveSpeed = 7;
 
         // white border
         this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
@@ -155,6 +163,7 @@ class Play extends Phaser.Scene {
             this.ship01.update();
             this.ship02.update();
             this.ship03.update();
+            this.smallShip.update();
         }
 
         // check collisions
@@ -175,6 +184,10 @@ class Play extends Phaser.Scene {
             this.p1Rocket.reset();
             // this.ship01.reset();
             this.shipExplode(this.ship01);
+        }
+        if (this.checkCollision(this.p1Rocket, this.smallShip)) {
+            this.p1Rocket.reset();
+            this.shipExplode(this.smallShip);
         }
     }
 
