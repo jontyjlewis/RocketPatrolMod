@@ -12,7 +12,7 @@ class Spaceship extends Phaser.GameObjects.Sprite {
     update() {
         // checking for unique ship logic
         if(this.points >= 60){
-            this.flipped = true;
+            this.flipped = false;
         }
         // have spaceship move across the screen right to left
         if(this.flipped == false) {
