@@ -57,7 +57,7 @@ class Play extends Phaser.Scene {
         // --ADD NEW SPACESHIP -- (worth 60 points)
         this.smallShip = new Spaceship(this, game.config.width + borderUISize * 9, borderUISize * 5, 'smallShip', 0, 60).setOrigin(0, 0);
         // set custom speed
-        this.smallShip.moveSpeed = 7;
+        this.smallShip.moveSpeed = 50;
 
         // white border
         // this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
